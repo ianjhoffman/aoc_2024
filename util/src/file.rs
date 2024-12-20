@@ -68,6 +68,15 @@ pub fn read_lines_to_type<T: FromStr<Err = GenericParseError>>(path: PathBuf) ->
     }).collect()
 }
 
+pub fn read_lines_raw(path: PathBuf) -> Result<Vec<String>> {
+    let f = File::open(path)?;
+    let reader = BufReader::new(f);
+
+    reader.lines().map(|line| {
+        line.map_err(|e| e.into())
+    }).collect()
+}
+
 pub fn read_lines_to_integers<T: FromStr<Err = std::num::ParseIntError>>(path: PathBuf) -> Result<Vec<T>> {
     let f = File::open(path)?;
     let reader = BufReader::new(f);
