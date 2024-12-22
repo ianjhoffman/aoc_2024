@@ -1,5 +1,3 @@
-use std::future::pending;
-
 use util::res::Result;
 
 #[derive(Debug)]
